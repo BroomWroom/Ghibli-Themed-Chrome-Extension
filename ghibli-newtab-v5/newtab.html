@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Tab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="newtab.css" />
+</head>
+
+<body>
+
+  <div id="bg" class="bg"></div>
+  <div class="vignette"></div>
+  <canvas id="canvas"></canvas>
+
+  <!-- Centre -->
+  <main class="main">
+
+    <div class="greeting-wrap">
+      <span class="greet-word" id="greetJp">おはよう</span>
+      <span class="greet-word hidden" id="greetEn">Good morning</span>
+    </div>
+
+    <h1 class="clock" id="clock">00:00</h1>
+    <p class="date" id="date">Thursday, 1 January</p>
+
+    <div class="search-wrap">
+      <input id="search" class="search" type="text" placeholder="search or enter address" autocomplete="off"
+        spellcheck="false" />
+    </div>
+  </main>
+
+  <!-- Bottom bar -->
+  <footer class="bar">
+
+    <span class="scene-name" id="sceneName" title="Choose background">Totoro's Forest</span>
+
+    <div class="music">
+      <button class="icon-btn" id="prevScene" title="Previous scene">&#8592;</button>
+      <button class="icon-btn" id="playBtn" title="Play / Pause">&#9654;</button>
+      <button class="icon-btn" id="nextScene" title="Next scene">&#8594;</button>
+      <span class="track-name" id="trackName">Forest Whispers</span>
+      <input class="vol" id="vol" type="range" min="0" max="1" step="0.05" value="0.35" title="Volume" />
+    </div>
+
+    <nav class="shortcuts" id="shortcuts"></nav>
+  </footer>
+
+  <!-- BG Picker panel  -->
+  <div class="picker-overlay" id="pickerOverlay">
+    <div class="picker-panel">
+      <div class="picker-header">
+        <span class="picker-title">Choose a scene</span>
+        <button class="picker-close" id="pickerClose">&#10005;</button>
+      </div>
+      <div class="picker-grid" id="pickerGrid"></div>
+    </div>
+  </div>
+
+  <audio id="audio" loop></audio>
+
+  <!-- Forest Log Sidebar Toggle -->
+  <button id="logToggle" class="log-toggle-btn" title="Open Forest Log">
+    <svg class="leaf-icon" viewBox="0 0 24 24" width="20" height="20">
+      <path d="M2 22C2 22 6 18 12 17C18 16 22 12 22 6C22 4 20 2 18 2C12 2 8 6 7 12C6 18 2 22 2 22Z" stroke="currentColor" stroke-width="1.5" fill="none" />
+      <path d="M12 17L7 12" stroke="currentColor" stroke-width="1.5" />
+    </svg>
+  </button>
+
+  <!-- Forest Log Sidebar -->
+  <div id="forestLog" class="forest-log">
+    <div class="log-header">
+      <span class="log-title">Forest Log</span>
+      <button id="logClose" class="log-close-btn" title="Close">&#10005;</button>
+    </div>
+    
+    <div class="log-content">
+      <!-- Progress Bar Section -->
+      <section class="log-section">
+        <h3 class="section-title">Time Progress</h3>
+        
+        <div class="progress-item">
+          <div class="progress-labels">
+            <span class="progress-label">Workday Progress</span>
+            <span class="progress-val" id="workdayVal">0%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill workday-fill" id="workdayFill"></div>
+          </div>
+          <div class="workday-settings">
+            <span class="settings-toggle" id="settingsToggle">Settings ⚙</span>
+            <div class="settings-inputs hidden" id="settingsInputs">
+              <div class="settings-field">
+                <label for="workdayStart">Start</label>
+                <input type="time" id="workdayStart" value="09:00">
+              </div>
+              <div class="settings-field">
+                <label for="workdayEnd">End</label>
+                <input type="time" id="workdayEnd" value="17:00">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <div class="progress-labels">
+            <span class="progress-label">Year Progress</span>
+            <span class="progress-val" id="yearVal">0%</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill year-fill" id="yearFill"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notepad Scratchpad Section -->
+      <section class="log-section scratchpad-section">
+        <h3 class="section-title">Scratchpad</h3>
+        <div class="scratchpad-container">
+          <div id="scratchpadPreview" class="scratchpad-preview empty" title="Click to edit">Click to write notes... (Markdown supported)</div>
+          <textarea id="scratchpadInput" class="scratchpad-input hidden" placeholder="Write temporary thoughts or copy text here... (Markdown supported)"></textarea>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="newtab.js"></script>
+</body>
+
+</html>
